@@ -45,6 +45,41 @@
                         "example":"12$#,MMh"
                     }
                 }
+            },
+            "userId": 
+            {
+                "type":"object",
+                "properties":
+                {
+                    "name": 
+                    {
+                        "type":"string",
+                        "example":"yadi"
+                    },
+                    "password":
+                    {
+                        "type":"string",
+                        "example":"hidfyd642#$"
+                    }
+                }
+            },
+            "responseFailed":
+            {
+                 "description":"failed",
+                    "content":
+                    {
+                        "application/json": 
+                        {
+                            "schema":
+                            {
+                                "example":
+                                {
+                                    "error":"Unauthorize"
+                                }
+                            }
+                        }
+                    }
+                
             }
         },
         "securitySchemes":
@@ -170,6 +205,111 @@
                 ]
             }
         },
-        "user/{id}"
+        "user/{id}":
+        {
+            "patch":
+            {
+                "summary":"update",
+                "description":"update data user",
+                "security": 
+                [
+                    { "JwtAuth":[] }
+                ],
+
+                "parameters":
+                [
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "schema":
+                        {
+                            "type":"integer"
+                        }
+                    }
+                ],
+                "requestBody":
+                {
+                    "required":true,
+                    "content": 
+                    {
+                        "application/json": 
+                        {
+                           "schema": 
+                           {
+                            "$ref":"#/components/schema/userId"
+                           }
+                        }
+                    }
+                },
+                "responses": 
+                {
+                    "401": 
+                    {
+                        "$ref":"#/components/schema/responseFailed",
+
+                    },
+
+                    "200": 
+                    {
+                        "description":"success",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/schema/userId"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete":
+            {
+                "summary":"delete",
+                "description":"delete data user",
+                "security": 
+                [
+                    { "JwtAuth":[] }
+                ],
+                
+                "parameters":
+                [
+                    {
+                        "in":"path",
+                        "name":"id",
+                        "schema":
+                        {
+                            "type":"integer"
+                        }
+                    }
+                ],
+
+                "responses": 
+                {
+                    "401": 
+                    {
+                        "$ref":"#/components/schema/responseFailed",
+
+                    },
+
+                    "200": 
+                    {
+                        "description":"success",
+                        "content":
+                        {
+                            "application/json":
+                            {
+                                "schema": 
+                                {
+                                    "$ref":"#/components/schema/userId"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }
