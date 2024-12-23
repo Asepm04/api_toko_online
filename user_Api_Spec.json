@@ -245,7 +245,7 @@
                 {
                     "401": 
                     {
-                        "$ref":"#/components/schema/responseFailed",
+                        "$ref":"#/components/schema/responseFailed"
 
                     },
 
@@ -290,7 +290,7 @@
                 {
                     "401": 
                     {
-                        "$ref":"#/components/schema/responseFailed",
+                        "$ref":"#/components/schema/responseFailed"
 
                     },
 
