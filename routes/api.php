@@ -31,4 +31,5 @@ Route::middleware(['jwtVerify']
 )->controller(App\Http\Controllers\ProductController::class)->prefix("product")->group(function()
 {
     Route::get("get","get");
+    Route::get("get/{id}","getById");
 });

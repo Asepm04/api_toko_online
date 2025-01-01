@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Resources\ProductCollection;
+use App\Http\Resources\ProductResource;
 
 class ProductController extends Controller
 {
@@ -19,6 +20,12 @@ class ProductController extends Controller
 
             return  new ProductCollection($product);
 
+    }
+
+    public function getById($id)
+    {
+        $product = Product::find($id);
+        return new ProductResource($product);
     }
 
 
