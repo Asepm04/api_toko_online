@@ -27,7 +27,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('me', [App\Http\Controllers\AuthController::class,'me']);
 });
 
-Route::middleware(\App\Http\Middleware\JwtMiddleware::class,
+Route::middleware(['jwtVerify']
 )->controller(App\Http\Controllers\ProductController::class)->prefix("product")->group(function()
 {
     Route::get("get","get");

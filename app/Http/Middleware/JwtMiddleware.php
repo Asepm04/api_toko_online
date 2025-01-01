@@ -20,7 +20,7 @@ class JwtMiddleware
         
         if(!$token)
         {
-            return response()->json(["error"=>"the token is'nt provided"],401);
+            return response()->json(["error"=>"the token is'nt invalid"],401);
         }
 
         $user = JWTAuth::setToken($token)->authenticate();

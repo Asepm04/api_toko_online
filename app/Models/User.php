@@ -8,6 +8,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Http\Models\Product;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -55,5 +57,10 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function product():HasOne
+    {
+        return $this->hasOne(Product::class,"user_id","id");
     }
 }
