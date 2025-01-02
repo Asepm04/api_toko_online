@@ -32,4 +32,6 @@ Route::middleware(['jwtVerify']
 {
     Route::get("get","get");
     Route::get("get/{id}","getById");
+    Route::patch("update/{id}","update");
+    Route::post("create","create");
 });

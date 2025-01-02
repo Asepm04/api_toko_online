@@ -14,7 +14,14 @@ class Product extends Model
     protected $table = 'Product2';
     public $timestamps = false;
 
-    protected $fillable = [];
+    protected $fillable = [
+        "user_id",
+        "name_product",
+        "kategori",
+        "image",
+        "price",
+        "stock"
+    ];
 
     public function user():BelongsTo
     {

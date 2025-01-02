@@ -8,6 +8,7 @@ use Tests\TestCase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
+use Illuminate\Http\UploadedFile;
 
 class ProductTest extends TestCase
 {
@@ -50,5 +51,27 @@ class ProductTest extends TestCase
         ->assertJson(["ok"=>"ok"]);
 
 
+    }
+
+    public function testUpdate()
+    {
+        $this->withHeaders(["Authorization" =>" Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNTczNTUyMywiZXhwIjoxNzM1NzM5MTIzLCJuYmYiOjE3MzU3MzU1MjMsImp0aSI6Ilo4Rk5HUFB2eU54MHd2cmMiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.iXSYNU26Bh2zvlusY5rUxkGXRZwjNsVyHoH2o41SbXM" ])
+        ->get("api/product/update/1")
+        ->assertStatus(200)
+        ->assertJson(["ok"=>"ok"]);
+    }
+
+    public function testCreateProduct()
+    {
+        $this->withHeaders(["Authorization"=> "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNTgyNTQ4OCwiZXhwIjoxNzM1ODI5MDg4LCJuYmYiOjE3MzU4MjU0ODgsImp0aSI6IlFxa3lzTFAzQmxEWm9ESTEiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.KqZHJ13o2bWkdlIhxEO3G0Uvb4UF0cWEXPNMxSGZS4Q"])
+        ->post("api/product/create",[
+            "name_product"=>"celana chino",
+            "kategori"=>"celana",
+            "stock"=>"100",
+            "price"=>"100000",
+            "image"=>UploadedFile::fake()->create("celana1.txt")
+        ])
+        ->assertStatus(201)
+        ->assertJson(["message"=>"success"]);
     }
 }
