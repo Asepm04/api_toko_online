@@ -74,4 +74,35 @@ class ProductTest extends TestCase
         ->assertStatus(201)
         ->assertJson(["message"=>"success"]);
     }
+    public function testCreateProductFailed()
+    {
+        $this->withHeaders(["Authorization"=> "Bearer "])
+        ->post("api/product/create",[
+            "name_product"=>"celana chino",
+            "kategori"=>"celana",
+            "stock"=>"100",
+            "price"=>"100000",
+            "image"=>UploadedFile::fake()->create("celana1.txt")
+        ])
+        ->assertStatus(401)
+        ->assertJson(["error"=>"the token is'nt invalid"]);
+    }
+
+    public function testCreateProductNotVaidated()
+    {
+        $this->withHeaders(["Authorization"=> "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNTgyNTQ4OCwiZXhwIjoxNzM1ODI5MDg4LCJuYmYiOjE3MzU4MjU0ODgsImp0aSI6IlFxa3lzTFAzQmxEWm9ESTEiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.KqZHJ13o2bWkdlIhxEO3G0Uvb4UF0cWEXPNMxSGZS4Q"])
+        ->post("api/product/create",[
+            "name_product"=>"",
+            "kategori"=>"",
+            "stock"=>"100",
+            "price"=>"100000",
+            "image"=>UploadedFile::fake()->create("celana1.txt")
+        ])
+        ->assertStatus(400)
+        ->assertJson([
+            ["name_product"=>["The name product field is required."],
+            "kategori"=>["The kategori field is required."]]
+        
+        ]);
+    }
 }
