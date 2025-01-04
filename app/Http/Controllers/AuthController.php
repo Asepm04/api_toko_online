@@ -4,6 +4,9 @@
     
     use Illuminate\Support\Facades\Auth;
     use App\Http\Controllers\Controller;
+    use Illuminate\Http\Exceptions\HttpResponseException;
+    use App\Http\Requests\UserRegisterRequest;
+    use App\Models\User;
     
     class AuthController extends Controller
     {
@@ -14,7 +17,7 @@
          */
         public function __construct()
         {
-            $this->middleware('auth:api', ['except' => ['login']]);
+            $this->middleware('auth:api', ['except' => ['login','register']]);
         }
     
         /**
@@ -22,6 +25,33 @@
          *
          * @return \Illuminate\Http\JsonResponse
          */
+
+         public function register(UserRegisterRequest $request)
+         {
+            $data = $request->validated();
+
+            if(!$data)
+            {
+                throw new HttpResponseException(
+                    response()->json(["error"=>"unvalidated"],400)
+                );
+            }
+            $data["password"] = bcrypt($data["password"]);
+
+            $user = User::create($data);
+            $login = Auth::login($user);
+            return response()->json([
+                "name"=>$data["name"],
+                "email"=>$data["email"],
+                'token_type' => 'bearer',
+                'expires_in' => auth()->factory()->getTTL() * 60,
+                'access_token' => $login,
+
+            ],201);
+
+            
+         }
+
         public function login()
         {
             $credentials = request(['email', 'password']);

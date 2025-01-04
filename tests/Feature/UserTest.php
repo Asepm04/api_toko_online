@@ -42,4 +42,22 @@ class UserTest extends TestCase
     ->post("api/logout",[])
     ->assertJson([]);
    }
+
+   public function testRegister()
+   {
+     $this->post("api/register",
+     [
+       "name"=>"yad",
+       "email"=>"yad@com",
+       "password"=>"12345678"
+     ])
+     ->assertStatus(201)
+     ->assertJson(
+      [
+        "name"=>"yad",
+        "email"=>"yad@com",
+        "bearer_token"=>"kkj"
+      ]
+     );
+   }
 }

@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post("/register",[App\Http\Controllers\AuthController::class,'register']);
 
 Route::group(['middleware' => 'api'], function () {
 
@@ -25,6 +26,7 @@ Route::group(['middleware' => 'api'], function () {
     Route::post('logout', [App\Http\Controllers\AuthController::class,'logout']);
     Route::post('refresh', [App\Http\Controllers\AuthController::class,'refresh']);
     Route::post('me', [App\Http\Controllers\AuthController::class,'me']);
+    
 });
 
 Route::middleware(['jwtVerify']
