@@ -23,6 +23,7 @@ class ProductResource extends JsonResource
            "kategori"=> $this->kategori,
            "stock"=> $this->stock,
             "price"=> $this->price,
+            "image"=>asset('storage/image/'.$this->image),
             "cart"=>url("api/cart/product/".$this->id)
             
         ];

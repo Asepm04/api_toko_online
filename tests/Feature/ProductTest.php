@@ -45,8 +45,8 @@ class ProductTest extends TestCase
     public function testGetProductById()
     {
         //ambil id dari id product 
-        $this->withHeaders(["Authorization" =>" Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNTczNTUyMywiZXhwIjoxNzM1NzM5MTIzLCJuYmYiOjE3MzU3MzU1MjMsImp0aSI6Ilo4Rk5HUFB2eU54MHd2cmMiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.iXSYNU26Bh2zvlusY5rUxkGXRZwjNsVyHoH2o41SbXM" ])
-        ->get("api/product/get/6")
+        $this->withHeaders(["Authorization" =>" Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNjE3NDkzNCwiZXhwIjoxNzM2MTc4NTM0LCJuYmYiOjE3MzYxNzQ5MzQsImp0aSI6ImdNazhwdmFSa3JHbXpvN1kiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.2g99poU5TPHwem1QVNpb-wUL2KFd0hTXB0lTU6XtfYU"])
+        ->get("api/product/get/23")
         ->assertStatus(200)
         ->assertJson(["ok"=>"ok"]);
 

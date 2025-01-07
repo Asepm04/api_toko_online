@@ -37,3 +37,9 @@ Route::middleware(['jwtVerify']
     Route::patch("update/{id}","update");
     Route::post("create","create");
 });
+
+Route::middleware(['jwtVerify'])->controller(App\Http\Controllers\CartModelController::class)->prefix("cart")->group(function()
+{
+    Route::get("product/{id}","add");
+    Route::get("product/","get");
+});

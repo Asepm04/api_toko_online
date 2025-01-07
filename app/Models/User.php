@@ -9,7 +9,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 // use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Relations\HasOne;
-use App\Http\Models\Product;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Http\Product;
+use App\Models\CartModel;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -62,5 +64,10 @@ class User extends Authenticatable implements JWTSubject
     public function product():HasOne
     {
         return $this->hasOne(Product::class,"user_id","id");
+    }
+
+    public function cartItem():HasMany
+    {
+        return $this->hasMany(CartModel::class);
     }
 }

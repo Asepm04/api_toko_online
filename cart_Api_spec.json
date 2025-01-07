@@ -1,0 +1,138 @@
+{
+    "openapi":"3.1.0",
+    "info":{
+        "title":"cart api spec",
+        "version":"1"
+    },
+    "server":
+    [{
+        "description":"link for cart api",
+        "url":"api/cart/produk"
+    }],
+
+    "components":
+    {
+        "securitySchemes":
+        {
+            "securityJwt":
+            {
+                "type":"Http",
+                "name":"jwtToken",
+                "in":"header",
+                "schema":"bearer",
+                "bearerFormat":"jwt"
+            }
+            
+        },
+        "schema":
+            {
+                "request":
+                {
+                    "id":
+                    {
+                        "type":"integer",
+                        "example":1
+                    },
+                    "user_id":
+                    {
+                        "type":"integer",
+                        "example":1
+                    },
+                    "product_id":
+                    {
+                        "type":"integer",
+                        "example":1
+                    }
+                },
+                "response":
+                {
+                    "failed":
+                    {
+                        "schema":
+                        {
+                            "example":
+                            {
+                                "error":"failed"
+                            }
+                        }
+                    }
+                }
+            }
+    },
+
+    "Paths":
+    {
+        "api/cart/product/{product_id}":
+        {
+            "post":
+            {
+                "summmary":"post cart",
+                "description":"add product to cart",
+
+                "parameters":
+                [
+                    {
+                        "in":"header",
+                        "name":"token_jwt"
+                    },
+                    {
+                        "in":"path",
+                        "name":"product_id"
+                    }
+                ],
+
+                "requestBody":
+                {
+                    "required":true,
+                    "content":
+                    {
+                        "application/json":
+                        {
+                            "schema":
+                            {
+                                "type":"object",
+                                "properties":
+                                {
+                                    "$ref":"#/components/schema/request"
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses":
+                {
+                    "200":
+                    {
+                        "description":"success",
+                        "content":
+                        {
+                            "application/json": 
+                            {
+                                "schema": 
+                                {
+                                    "example": 
+                                    {
+                                        "message":"success"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401":
+                    {
+                        "description":"failed",
+                        "$ref":"#/components/schema/response/failed"
+                    }
+                },
+
+                "security":
+                [
+                    {
+                        "securityJwt":[]
+                    }
+                ]
+            }
+        }
+    }
+}
