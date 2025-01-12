@@ -13,7 +13,7 @@ class UserTest extends TestCase
      */
    public function testLoginUser()
    {
-     $this->post("api/login",["email"=>"yadi2@com","password"=>"12345678"])
+     $this->post("api/login",["email"=>"eko@com","password"=>"12345678"])
      ->assertJson([
         'access_token' => '',
         'token_type' => 'bearer',

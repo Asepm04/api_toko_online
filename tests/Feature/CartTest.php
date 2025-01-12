@@ -21,7 +21,7 @@ class CartTest extends TestCase
     }
     public function testGet()
     {
-        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNjI1OTI0OSwiZXhwIjoxNzM2MjYyODQ5LCJuYmYiOjE3MzYyNTkyNDksImp0aSI6IjhjVEVwUVVZZTFVRjBwbnQiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.O8XdVaUOpWFSWPW60D5qe4RWFD_NSKVRJ4MuNqTKEvg"])
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNjY4OTgzNiwiZXhwIjoxNzM2NjkzNDM2LCJuYmYiOjE3MzY2ODk4MzYsImp0aSI6Ik1sQ2xmamNsY1p4Zkt5ZkkiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.hAKQNj258L3xi6UavsyWiciH54wNQjRfoTKH8AkGCqY"])
         ->get("api/cart/product")
         ->assertStatus(200)
         ->assertJson(['']);

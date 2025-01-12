@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartModel extends Model
 {
@@ -19,6 +20,11 @@ class CartModel extends Model
     public function product():HasMany
     {
         return $this->hasMany(Product::class,"id","product_id");
+    }
+
+    public function user():BelongsTo
+    {
+        return $this->belongsTo(User::class,"user_id");
     }
 
 }

@@ -20,6 +20,11 @@ class CartModelController extends Controller
             "product_id"=>$id
         ];
 
+        if($id == null)
+        {
+            return response()->json(["error"=>"failed"],400);
+        }
+
         if(!$data)
         {
             return response()->json(["error"=>"failed"],400);
@@ -40,6 +45,23 @@ class CartModelController extends Controller
 
         //success if use json without resource
         $cart = Auth::user()->cartItem()->with('product')->get();
-        return response()->json($cart);
+        return response()->json(
+            [
+             $cart->map(function($item)
+             {
+              return $item->product->map(function($items)
+               {
+                return [
+                    "id"=>$items->id,
+                    "kategori"=> $items->kategori,
+                    "name"=>$items->name_product,
+                    "stock"=>$items->stock,
+                    "price"=>$items->price,
+                    "image"=>asset("storage/image/".$items->image),
+                    "kuantitas"=>1
+                ];
+               });
+             })
+            ]);
     }
 }
