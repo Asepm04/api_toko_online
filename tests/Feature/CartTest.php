@@ -27,4 +27,19 @@ class CartTest extends TestCase
         ->assertJson(['']);
 
     }
+
+    public  function testDelete()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNjY4OTgzNiwiZXhwIjoxNzM2NjkzNDM2LCJuYmYiOjE3MzY2ODk4MzYsImp0aSI6Ik1sQ2xmamNsY1p4Zkt5ZkkiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.hAKQNj258L3xi6UavsyWiciH54wNQjRfoTKH8AkGCqY"])
+        ->get("api/cart/product/delete/3")
+        ->assertJson(["message"=>"true"])
+        ->assertStatus(200);
+    }
+    public  function testDeletefAILED()
+    {
+        $this->withHeaders(["Authorization"=>"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2FwaS9sb2dpbiIsImlhdCI6MTczNjY4OTgzNiwiZXhwIjoxNzM2NjkzNDM2LCJuYmYiOjE3MzY2ODk4MzYsImp0aSI6Ik1sQ2xmamNsY1p4Zkt5ZkkiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.hAKQNj258L3xi6UavsyWiciH54wNQjRfoTKH8AkGCqY"])
+        ->get("api/cart/product/delete/2")
+        ->assertJson(["error"=>"error"])
+        ->assertStatus(404);
+    }
 }

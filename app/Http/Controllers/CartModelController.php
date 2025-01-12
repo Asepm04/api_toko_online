@@ -58,10 +58,33 @@ class CartModelController extends Controller
                     "stock"=>$items->stock,
                     "price"=>$items->price,
                     "image"=>asset("storage/image/".$items->image),
-                    "kuantitas"=>1
+                    "kuantitas"=>1,
+                    "delete"=>url("api/cart/product/delete/".$items->id)
                 ];
                });
              })
             ]);
+    }
+
+    public function delete($id)
+    {
+        if($id == null)
+        {
+            return response()->json(["error"=>"Unauthorized"],400);
+        }
+
+        $cart = CartModel::where("user_id",Auth::user()->id)->where("product_id",$id)->first();
+        Log::info(json_encode(CartModel::where("user_id",Auth::user())->where("product_id",$id)->first()));
+
+       if($cart)
+       {
+        $cart->delete();
+        return response()->json(["message"=>"true"],200);
+
+       }
+       else{
+        return response()->json(["error"=>"error",],404);
+       }
+
     }
 }

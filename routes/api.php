@@ -42,4 +42,9 @@ Route::middleware(['jwtVerify'])->controller(App\Http\Controllers\CartModelContr
 {
     Route::get("product/{id}","add");
     Route::get("product/","get");
+    Route::get("product/delete/{id}","delete")->where('id','[0-9]+');
+    Route::fallback("product/delete",function()
+        {
+            return response()->json(["message"=>"ups not found"],404);
+        });
 });
