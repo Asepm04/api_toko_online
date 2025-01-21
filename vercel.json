@@ -29,7 +29,6 @@
         "DB_HOST": "4gg.h.filess.io",
         "DB_PORT": "3306",
         "DB_DATABASE": "Ecommerce",
-        "DB_USERNAME": "root",
-        "JWT_SECRET":"D598aaa8OB7XAC4ZLEmy2N6in9p5zgo49a93seZ7YSlMv4kxMPlac3kgwFQR3gJ0"
+        "DB_USERNAME": "root"
     }
 }
